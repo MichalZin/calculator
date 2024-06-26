@@ -1,0 +1,50 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const display = document.getElementsByClassName("display")[0];
+    const buttons = document.querySelectorAll(".btt");
+    const clear = document.querySelector("clear");
+
+    buttons.forEach((btt) => {
+        btt.addEventListener('click', () => {
+            if (btt.value !== 'clear' && btt.value !== 'result') {
+                const newElement = document.createElement('p');
+                newElement.innerText = `${btt.value}`;
+                display.appendChild(newElement);
+            }
+            if (btt.value === 'clear') {
+                while (display.firstChild) {
+                    display.removeChild(display.firstChild);
+                }
+            }
+            if (btt.value === 'result') {
+                let result = 0;
+                let operation = '';
+
+                display.childNodes.forEach((element) => {
+                    if (!isNaN(parseFloat(element.innerText))) {
+                        const value = parseFloat(element.innerText);
+
+                        if (operation === '') {
+                            result = value;
+                        } else if (operation === '+') {
+                            result += value;
+                        } else if (operation === '-') {
+                            result -= value;
+                        } else if (operation === '*') {
+                            result *= value;
+                        } else if (operation === '/') {
+                            result /= value;
+                        }
+
+                        operation = '';
+                    } else {
+                        operation = element.innerText;
+                    }
+                });
+
+                const resultElement = document.createElement('p');
+                resultElement.innerText = `Result: ${result}`;
+                display.appendChild(resultElement);
+            }
+        });
+    });
+});x
