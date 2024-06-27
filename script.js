@@ -8,12 +8,15 @@ const functionKey = document.querySelectorAll("funk")
 buttons.forEach((btt) => {
     btt.addEventListener('click', () => {
         const paragraph = document.createElement('p');
+        paragraph.classList.add('paragraph');
+        display.appendChild(paragraph);
+        const resultOf = document.createElement('p');
+        display.appendChild(resultOf)
 
         if (btt.value !== 'clear' && btt.value !== 'result') {
-
-            
+            paragraph.style.visibility = "visible";
             paragraph.innerText = `${btt.value}`
-            display.appendChild(paragraph)
+            
         }
         
         if (btt.value === 'clear') {
@@ -27,10 +30,10 @@ buttons.forEach((btt) => {
             for (let i = 0; i < display.childNodes.length; i++) {
                 result += display.childNodes[i].textContent;
             }
-        
+
             const numbers = result.split(' ');
             const operatorKey = numbers[1];
-        
+            
             if (/^[+\-*/]$/.test(operatorKey)) {
                 const firstChild = parseFloat(numbers[0]);
                 const lastChild = parseFloat(numbers[2]);
@@ -38,18 +41,23 @@ buttons.forEach((btt) => {
                 const displayResults = () => {
                     if (operatorKey === '+') {
                         const sum = firstChild + lastChild;
-                        console.log(sum);
+                        paragraph.innerText = '';
+                        resultOf.innerText = `${sum}`;
+                        
                     } else if (operatorKey === '-') {
                         const diff = firstChild - lastChild;
-                        console.log(diff);
+                        resultOf.innerText = `${diff}`
+
                     } else if (operatorKey === '*') {
                         const multip = firstChild * lastChild;
-                        console.log(multip);
-                    } else if (operatorKey === '/') {
-                        const diff = firstChild / lastChild;
-                        console.log(diff);
-                    }
+                        resultOf.innerText = `${multip}`
 
+                    } else if (operatorKey === '/') {
+                        const divid = Math.round((firstChild / lastChild)*100)/100;
+                        resultOf.innerText = `${divid}`
+
+                    }
+                    
                 };
                 displayResults()
             }

@@ -68,6 +68,7 @@
     flex-direction: column;
     align-items:center;
     justify-content: space-between;
+    
 }
 .clear {
     width: 150px;
@@ -110,4 +111,14 @@ box-shadow: inset 0px 0px 40px 40px red;
     font-size: 24px;
     text-align: center;
     color: aliceblue;
+}
+.paragraph {
+    font-size: 16px;
+    position: relative;
+    top:-35px;
+    left: -250px
+}
+.resultOf {
+    font-size: 60px;
+    font-weight: bold;
 }
